@@ -29,3 +29,21 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.vm.v1.UpdateStorageImpInfoReply'
+components:
+    schemas:
+        api.vm.v1.UpdateStorageImpInfoRequest:
+            type: object
+            properties:
+                instanceId:
+                    type: string
+                appId:
+                    type: string
+                srvId:
+                    type: string
+                envId:
+                    type: string
+                resourceGroupId:
+                    type: string
+        api.vm.v1.UpdateStorageImpInfoReply:
+            type: object
+            properties: {}
