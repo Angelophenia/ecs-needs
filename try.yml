@@ -1,0 +1,31 @@
+openapi: 3.0.3
+info:
+    title: Vm API
+    version: 0.0.1
+paths:
+    /internal/vm/v1/disk/imp-info:
+        put:
+            tags:
+                - Vm
+                - 云硬盘
+                - resourceCode:disk
+                - operateType:UPDATE
+                - accessLevel:OPERATE
+                - protection:false
+                - webSocket:false
+            summary: 更新云硬盘重要信息(应用、服务、环境和资源组)
+            description: 更新实例重要信息(应用、服务、环境和资源组)
+            operationId: UpdateStorageImpInfo
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.vm.v1.UpdateStorageImpInfoRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.vm.v1.UpdateStorageImpInfoReply'
