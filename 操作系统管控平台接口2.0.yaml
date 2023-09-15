@@ -1,0 +1,430 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: Mops API
+    description: The greeting service definition.
+    version: 0.0.1
+paths:
+    /helloworld/{name}:
+        get:
+            tags:
+                - Mops
+            description: Sends a greeting
+            operationId: Mops_SayHello
+            parameters:
+                - name: name
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/helloworld.v1.HelloReply'
+    /mops/v1/system/operationplans:
+        get:
+            tags:
+                - Mops
+            description: 查看运维计划列表
+            operationId: Mops_GetOperationPlanList
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/helloworld.v1.GetOperationPlanListReply'
+        post:
+            tags:
+                - Mops
+            description: 创建运维计划
+            operationId: Mops_CreateOperationPlan
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/helloworld.v1.CreateOperationPlanRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/helloworld.v1.CreateOperationPlanReply'
+    /mops/v1/system/operationplans/abandon:
+        delete:
+            tags:
+                - Mops
+            description: 废弃运维计划
+            operationId: Mops_AbandonOperationPlan
+            parameters:
+                - name: planId
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/helloworld.v1.DeleteReply'
+    /mops/v1/system/operationplans/batch:
+        post:
+            tags:
+                - Mops
+            description: 创建运维批次
+            operationId: Mops_CreateOperationPlanBatch
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/helloworld.v1.CreateOperationPlanBatchRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/helloworld.v1.CreateOperationPlanBatchReply'
+    /mops/v1/system/operationplans/delete:
+        delete:
+            tags:
+                - Mops
+            description: 删除运维计划
+            operationId: Mops_DeleteOperationPlan
+            parameters:
+                - name: planId
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/helloworld.v1.DeleteReply'
+    /mops/v1/system/operationplans/details:
+        get:
+            tags:
+                - Mops
+            description: 查看运维计划详情(日志)
+            operationId: Mops_GetOperationPlanDetails
+            parameters:
+                - name: planId
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/helloworld.v1.GetOperationPlanDetailsReply'
+        post:
+            tags:
+                - Mops
+            description: 编辑运维计划
+            operationId: Mops_EditOperationPlanDetails
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/helloworld.v1.EditOperationPlanDetailsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/helloworld.v1.EditOperationPlanDetailsReply'
+    /mops/v1/system/operationplans/details/status:
+        get:
+            tags:
+                - Mops
+            description: 更新执行状态
+            operationId: Mops_UpdateOperationPlanExeStatus
+            parameters:
+                - name: planId
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/helloworld.v1.UpdateOperationPlanExeStatusReply'
+    /mops/v1/system/operationplans/execute:
+        post:
+            tags:
+                - Mops
+            description: 执行运维计划
+            operationId: Mops_ExecuteOperationPlan
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/helloworld.v1.ExecuteOperationPlanRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/helloworld.v1.ExecuteOperationPlanReply'
+components:
+    schemas:
+        helloworld.v1.CreateOperationPlanBatchReply:
+            type: object
+            properties:
+                planId:
+                    type: string
+                executeBatch:
+                    type: string
+        helloworld.v1.CreateOperationPlanBatchRequest:
+            type: object
+            properties:
+                cmd:
+                    $ref: '#/components/schemas/helloworld.v1.CreateOperationPlanBatchRequest_Cmd'
+            description: 创建运维批次
+        helloworld.v1.CreateOperationPlanBatchRequest_Cmd:
+            type: object
+            properties:
+                planId:
+                    type: string
+                ip:
+                    type: string
+        helloworld.v1.CreateOperationPlanReply:
+            type: object
+            properties:
+                planId:
+                    type: string
+                flowId:
+                    type: string
+        helloworld.v1.CreateOperationPlanRequest:
+            type: object
+            properties:
+                cmd:
+                    $ref: '#/components/schemas/helloworld.v1.CreateOperationPlanRequest_Cmd'
+            description: 创建运维计划
+        helloworld.v1.CreateOperationPlanRequest_Cmd:
+            type: object
+            properties:
+                name:
+                    type: string
+                type:
+                    type: string
+                creator:
+                    type: string
+                introduction:
+                    type: string
+                ip:
+                    type: string
+        helloworld.v1.DeleteReply:
+            type: object
+            properties:
+                isDeleted:
+                    type: string
+                message:
+                    type: string
+        helloworld.v1.EditOperationPlanDetailsReply:
+            type: object
+            properties:
+                isModified:
+                    type: string
+                message:
+                    type: string
+        helloworld.v1.EditOperationPlanDetailsRequest:
+            type: object
+            properties:
+                cmd:
+                    $ref: '#/components/schemas/helloworld.v1.EditOperationPlanDetailsRequest_Cmd'
+            description: 编辑运维计划
+        helloworld.v1.EditOperationPlanDetailsRequest_Batch:
+            type: object
+            properties:
+                executeBatch:
+                    type: string
+                ip:
+                    type: string
+        helloworld.v1.EditOperationPlanDetailsRequest_Cmd:
+            type: object
+            properties:
+                planId:
+                    type: string
+                name:
+                    type: string
+                type:
+                    type: string
+                creator:
+                    type: string
+                introduction:
+                    type: string
+                batch:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/helloworld.v1.EditOperationPlanDetailsRequest_Batch'
+        helloworld.v1.ExecuteOperationPlanReply:
+            type: object
+            properties:
+                planId:
+                    type: string
+                executeStatus:
+                    type: string
+        helloworld.v1.ExecuteOperationPlanRequest:
+            type: object
+            properties:
+                cmd:
+                    $ref: '#/components/schemas/helloworld.v1.ExecuteOperationPlanRequest_Cmd'
+            description: 执行运维计划
+        helloworld.v1.ExecuteOperationPlanRequest_Cmd:
+            type: object
+            properties:
+                planId:
+                    type: string
+                type:
+                    type: string
+                executeBatch:
+                    type: string
+        helloworld.v1.GetOperationPlanDetailsReply:
+            type: object
+            properties:
+                paging:
+                    $ref: '#/components/schemas/helloworld.v1.GetOperationPlanDetailsReply_Paging'
+                data:
+                    $ref: '#/components/schemas/helloworld.v1.GetOperationPlanDetailsReply_Data'
+        helloworld.v1.GetOperationPlanDetailsReply_Data:
+            type: object
+            properties:
+                planId:
+                    type: string
+                flowId:
+                    type: string
+                name:
+                    type: string
+                type:
+                    type: string
+                status:
+                    type: string
+                creator:
+                    type: string
+                details:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/helloworld.v1.GetOperationPlanDetailsReply_Details'
+        helloworld.v1.GetOperationPlanDetailsReply_Details:
+            type: object
+            properties:
+                executeBatch:
+                    type: string
+                executeStatus:
+                    type: string
+                ip:
+                    type: string
+                log:
+                    type: string
+        helloworld.v1.GetOperationPlanDetailsReply_Paging:
+            type: object
+            properties:
+                total:
+                    type: integer
+                    format: uint64
+                pageNum:
+                    type: integer
+                    format: uint64
+                pageSize:
+                    type: integer
+                    format: uint64
+                pageTotal:
+                    type: integer
+                    format: uint64
+        helloworld.v1.GetOperationPlanListReply:
+            type: object
+            properties:
+                paging:
+                    $ref: '#/components/schemas/helloworld.v1.GetOperationPlanListReply_Paging'
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/helloworld.v1.GetOperationPlanListReply_Data'
+            description: 查看运维计划列表
+        helloworld.v1.GetOperationPlanListReply_Data:
+            type: object
+            properties:
+                planId:
+                    type: string
+                flowId:
+                    type: string
+                name:
+                    type: string
+                type:
+                    type: string
+                status:
+                    type: string
+                creator:
+                    type: string
+                introduction:
+                    type: string
+                createTime:
+                    type: string
+                modifyTime:
+                    type: string
+        helloworld.v1.GetOperationPlanListReply_Paging:
+            type: object
+            properties:
+                total:
+                    type: integer
+                    format: uint64
+                pageNum:
+                    type: integer
+                    format: uint64
+                pageSize:
+                    type: integer
+                    format: uint64
+                pageTotal:
+                    type: integer
+                    format: uint64
+        helloworld.v1.HelloReply:
+            type: object
+            properties:
+                message:
+                    type: string
+            description: The response message containing the greetings
+        helloworld.v1.UpdateOperationPlanExeStatusReply:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/helloworld.v1.UpdateOperationPlanExeStatusReply_Data'
+        helloworld.v1.UpdateOperationPlanExeStatusReply_Data:
+            type: object
+            properties:
+                planId:
+                    type: string
+                details:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/helloworld.v1.UpdateOperationPlanExeStatusReply_Details'
+        helloworld.v1.UpdateOperationPlanExeStatusReply_Details:
+            type: object
+            properties:
+                executeBatch:
+                    type: string
+                executeStatus:
+                    type: string
+                log:
+                    type: string
+tags:
+    - name: Mops
